@@ -26,9 +26,5 @@
     "mocha": "^2.2.5",
     "mocha-multi": "^0.7.1",
     "node-tts-google": "0.0.1"
-  },
-  "devDependencies": {
-    "async": "^0.9.0",
-    "should": "^6.0.1"
   }
 }
