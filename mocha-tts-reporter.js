@@ -1,10 +1,7 @@
-var debug=require('debug')('mocha:mongoreporter'),
-    Q=require('q'),
-    mongo=require('mongodb'),
-    dateFormat=require('dateFormat'), now;
-    os=require('os');
+"use strict";
+var debug=require('debug')('mocha:ttsreporter');
 
-module.exports = mocha_mongo_reporter;
+module.exports = mocha_tts_reporter;
 
 function mocha_tts_reporter(runner, options) {
   var db = null;
@@ -20,17 +17,19 @@ function mocha_tts_reporter(runner, options) {
   var tts = require("node-tts-google").tts;
 
   runner.on('pass', function(test){
+    debug("test pass");
     tts.speak(_options.testPass || "test passed" );
     passes++;
   });
 
   runner.on('fail', function(test, err){
+    debug("test fail");
     tts.speak( _options.testFail || "test failed" );
     failures++;
   });
 
   runner.on('end', function(){
-    debug("runner.end");
+    debug("runner end %d %d", failures, passes);
     if( failures > 0 ) {
       tts.speak( _options.onSuiteFail || "suite failed"); 
     } else {
